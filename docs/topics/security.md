@@ -66,6 +66,21 @@ Two tag styles indicate the build strategy used.
 
 The Typhoon-built Kubelet image is used as the official image. Automated builds provide an alternative image for those preferring to trust images built by Quay/Dockerhub (albeit lacking multi-arch). To use the fallback registry or an alternative tag, see [customization](/advanced/customization/#kubelet).
 
+### flannel-cni
+
+Typhoon packages the [flannel-cni](https://github.com/poseidon/flannel-cni) container image to provide security patches.
+
+* [quay.io/poseidon/flannel-cni](https://quay.io/repository/poseidon/flannel-cni) (official)
+
+## Terraform Providers
+
+Typhoon publishes Terraform providers to the Terraform Registry, GPG signed by 0x8F515AD1602065C8.
+
+| Name     | Source | Registry |
+|----------|--------|----------|
+| ct       | [github](https://github.com/poseidon/terraform-provider-ct) | [poseidon/ct](https://registry.terraform.io/providers/poseidon/ct/latest) |
+| matchbox | [github](https://github.com/poseidon/terraform-provider-matchbox) | [poseidon/matchbox](https://registry.terraform.io/providers/poseidon/matchbox/latest) |
+
 ## Disclosures
 
 If you find security issues, please email `security@psdn.io`. If the issue lies in upstream Kubernetes, please inform upstream Kubernetes as well.

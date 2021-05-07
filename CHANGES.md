@@ -4,6 +4,60 @@ Notable changes between versions.
 
 ## Latest
 
+### v1.18.8
+
+* Kubernetes [v1.18.8](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.18.md#v1188)
+* Migrate from Terraform v0.12.x to v0.13.x ([#804](https://github.com/poseidon/typhoon/pull/804)) (**action required**)
+  * Recommend Terraform v0.13.x ([migration guide](https://typhoon.psdn.io/topics/maintenance/#terraform-versions))
+  * Support automatic install of poseidon's provider plugins ([poseidon/ct](https://registry.terraform.io/providers/poseidon/ct/latest), [poseidon/matchbox](https://registry.terraform.io/providers/poseidon/matchbox/latest))
+  * Require Terraform v0.12.26+ (migration compatibility)
+  * Require `terraform-provider-ct` v0.6.1
+  * Require `terraform-provider-matchbox` v0.4.1
+* Update etcd from v3.4.9 to [v3.4.10](https://github.com/etcd-io/etcd/releases/tag/v3.4.10)
+* Update CoreDNS from v1.6.7 to [v1.7.0](https://coredns.io/2020/06/15/coredns-1.7.0-release/)
+* Update Cilium from v1.8.1 to [v1.8.2](https://github.com/cilium/cilium/releases/tag/v1.8.2)
+* Update [coreos/flannel-cni](https://github.com/coreos/flannel-cni) to [poseidon/flannel-cni](https://github.com/poseidon/flannel-cni) ([#798](https://github.com/poseidon/typhoon/pull/798))
+  * Update CNI plugins and fix CVEs with Flannel CNI (non-default)
+  * Transition to a poseidon maintained container image
+
+### AWS
+
+* Allow `terraform-provider-aws` v3.0+ ([#803](https://github.com/poseidon/typhoon/pull/803))
+  * Recommend updating `terraform-provider-aws` to v3.0+
+  * Continue to allow v2.23+, no v3.x specific features are used
+
+### DigitalOcean
+
+* Require `terraform-provider-digitalocean` v1.21+ for Terraform v0.13.x (unenforced)
+* Require `terraform-provider-digitalocean` v1.20+ for Terraform v0.12.x
+
+### Fedora CoreOS
+
+* Fix support for Flannel with Fedora CoreOS ([#795](https://github.com/poseidon/typhoon/pull/795))
+  * Configure `flannel.1` link to select its own MAC address to solve flannel
+  pod-to-pod traffic drops starting with default link changes in Fedora CoreOS
+  32.20200629.3.0 ([details](https://github.com/coreos/fedora-coreos-tracker/issues/574#issuecomment-665487296))
+
+#### Addons
+
+* Update Prometheus from v2.19.2 to [v2.20.0](https://github.com/prometheus/prometheus/releases/tag/v2.20.0)
+* Update Grafana from v7.0.6 to [v7.1.3](https://github.com/grafana/grafana/releases/tag/v7.1.3)
+
+## v1.18.6
+
+* Kubernetes [v1.18.6](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.18.md#v1186)
+* Update Calico from v3.15.0 to [v3.15.1](https://docs.projectcalico.org/v3.15/release-notes/)
+* Update Cilium from v1.8.0 to [v1.8.1](https://github.com/cilium/cilium/releases/tag/v1.8.1)
+
+#### Addons
+
+* Update nginx-ingress from v0.33.0 to [v0.34.1](https://github.com/kubernetes/ingress-nginx/releases/tag/nginx-0.34.1)
+  * [ingress-nginx](https://github.com/kubernetes/ingress-nginx/releases/tag/controller-v0.34.0) will publish images only to gcr.io
+* Update Prometheus from v2.19.1 to [v2.19.2](https://github.com/prometheus/prometheus/releases/tag/v2.19.2)
+* Update Grafana from v7.0.4 to [v7.0.6](https://github.com/grafana/grafana/releases/tag/v7.0.6)
+
+## v1.18.5
+
 * Kubernetes [v1.18.5](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.18.md#v1185)
 * Add Cilium v1.8.0 as a (experimental) CNI provider option ([#760](https://github.com/poseidon/typhoon/pull/760))
   * Set `networking` to "cilium" to enable

@@ -7,7 +7,7 @@ systemd:
         - name: 40-etcd-cluster.conf
           contents: |
             [Service]
-            Environment="ETCD_IMAGE_TAG=v3.4.9"
+            Environment="ETCD_IMAGE_TAG=v3.4.10"
             Environment="ETCD_IMAGE_URL=docker://quay.io/coreos/etcd"
             Environment="RKT_RUN_ARGS=--insecure-options=image"
             Environment="ETCD_NAME=${etcd_name}"
@@ -62,7 +62,7 @@ systemd:
         After=coreos-metadata.service
         Wants=rpc-statd.service
         [Service]
-        Environment=KUBELET_IMAGE=docker://quay.io/poseidon/kubelet:v1.18.5
+        Environment=KUBELET_IMAGE=docker://quay.io/poseidon/kubelet:v1.18.8
         EnvironmentFile=/run/metadata/coreos
         ExecStartPre=/bin/mkdir -p /etc/kubernetes/cni/net.d
         ExecStartPre=/bin/mkdir -p /etc/kubernetes/manifests
@@ -144,7 +144,7 @@ systemd:
             --volume script,kind=host,source=/opt/bootstrap/apply \
             --mount volume=script,target=/apply \
             --insecure-options=image \
-            docker://quay.io/poseidon/kubelet:v1.18.5 \
+            docker://quay.io/poseidon/kubelet:v1.18.8 \
             --net=host \
             --dns=host \
             --exec=/apply
@@ -153,6 +153,10 @@ systemd:
         WantedBy=multi-user.target
 storage:
   directories:
+    - path: /var/lib/etcd
+      filesystem: root
+      mode: 0700
+      overwrite: true
     - path: /etc/kubernetes
       filesystem: root
       mode: 0755
@@ -171,6 +175,7 @@ storage:
           mv tls/etcd/etcd-client* /etc/kubernetes/bootstrap-secrets/
           chown -R etcd:etcd /etc/ssl/etcd
           chmod -R 500 /etc/ssl/etcd
+          chmod -R 700 /var/lib/etcd
           mv auth/kubeconfig /etc/kubernetes/bootstrap-secrets/
           mv tls/k8s/* /etc/kubernetes/bootstrap-secrets/
           mkdir -p /etc/kubernetes/manifests
