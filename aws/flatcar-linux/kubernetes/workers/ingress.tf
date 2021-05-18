@@ -12,8 +12,8 @@ resource "aws_lb_target_group" "workers-http" {
   # HTTP health check for ingress
   health_check {
     protocol = "HTTP"
-    port     = 10254
-    path     = "/healthz"
+    port     = var.ingress_http_port
+    path     = "/ping"
 
     # NLBs required to use same healthy and unhealthy thresholds
     healthy_threshold   = 3
@@ -38,8 +38,8 @@ resource "aws_lb_target_group" "workers-https" {
   # HTTP health check for ingress
   health_check {
     protocol = "HTTP"
-    port     = 10254
-    path     = "/healthz"
+    port     = var.ingress_https_port
+    path     = "/ping"
 
     # NLBs required to use same healthy and unhealthy thresholds
     healthy_threshold   = 3
